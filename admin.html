@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Euro Wallet - QR codes</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", Roboto, Tahoma, sans-serif; margin: 0; background: #f3f5fa; color: #16203a; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.2rem; }
+  h1 { font-size: 1.4rem; }
+  .panel { background: #fff; border: 1px solid #e3e7f0; border-radius: 14px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  label { font-weight: 600; margin-inline-end: .4rem; }
+  input, button { font: inherit; padding: .5rem .7rem; border-radius: 10px; border: 1px solid #c9d1e3; }
+  button { background: #0f2454; color: #fff; border: 0; font-weight: 700; cursor: pointer; }
+  button.light { background: #e8ecf6; color: #0f2454; }
+  .row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+  .ok { color: #1e9e5a; font-weight: 600; } .bad { color: #d23c3c; font-weight: 600; }
+  #codes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .qr { background: #fff; border: 2px solid #0f2454; border-radius: 18px; padding: 1rem; text-align: center; break-inside: avoid; cursor: pointer; }
+  .qr h2 { margin: 0; font-size: 1.5rem; } .qr h3 { margin: 0 0 .4rem; font-weight: 600; color: #47557a; }
+  .qr svg { width: 100%; max-width: 340px; height: auto; }
+  .qr .meta { font-size: .95rem; color: #47557a; }
+  .qr.full { position: fixed; inset: 0; z-index: 9; border: 0; border-radius: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .qr.full svg { max-width: min(92vw, 72vh); }
+  @media (max-width: 600px) { #codes { grid-template-columns: 1fr; } }
+  @media print { .noprint { display: none; } body { background: #fff; } main { padding: 0; } }
+</style>
+</head>
+<body>
+<main>
+  <h1 class="noprint">Euro Wallet — QR code generator</h1>
+
+  <div class="panel noprint" id="keyPanel">
+    <div class="row">
+      <label for="keyFile">Admin key file (admin-key.json):</label>
+      <input type="file" id="keyFile" accept=".json,application/json">
+      <span id="keyState"></span>
+      <button class="light" id="forget" hidden>Remove key from this browser</button>
+    </div>
+    <p style="margin:.6rem 0 0;font-size:.9rem;color:#6b7690">The key stays in this browser only. Anyone who has it can create Euro codes, so never share it or upload it.</p>
+  </div>
+
+  <div class="panel noprint">
+    <div class="row">
+      <label for="date">Date</label><input type="date" id="date">
+      <label for="value">Euros per scan</label><input type="number" id="value" min="1" max="99" value="1" style="width:5rem">
+      <span id="pick">
+        <label><input type="checkbox" value="m" checked> Mass</label>
+        <label><input type="checkbox" value="s" checked> Service</label>
+        <label><input type="checkbox" value="c" checked> Class</label>
+        <label><input type="checkbox" value="t"> Tasbeha</label>
+      </span>
+      <button id="make">Create codes</button>
+      <button class="light" id="print">Print</button>
+    </div>
+    <p style="margin:.6rem 0 0;font-size:.9rem;color:#6b7690">Each member can collect each activity once per date. Codes work only on that date, in their scanning window: Mass 7:45-8:15, Service 10:00-10:15, Class 11:00-11:30 (Friday), Tasbeha 19:00-19:30 (Thursday). Picking a Friday or Thursday ticks the right activities. Tap a code to show it full screen.</p>
+  </div>
+
+  <div id="codes"></div>
+</main>
+<script src="vendor/qrcode.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

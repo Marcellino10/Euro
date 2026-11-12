@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Euro Wallet</title>
+<meta name="theme-color" content="#0f2454">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Euro Wallet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- First-run screen -->
+<section id="setup" class="screen" hidden>
+  <div class="setup-box">
+    <div class="coin big">€</div>
+    <h1 data-t="appName"></h1>
+    <p class="muted" data-t="setupIntro"></p>
+
+    <div id="setupNew">
+      <label for="nameInput" data-t="yourName"></label>
+      <input id="nameInput" type="text" maxlength="40" autocomplete="name" data-ph="namePh">
+      <button id="startBtn" class="btn primary" data-t="start"></button>
+      <button id="showRestore" class="btn link" data-t="haveCode"></button>
+    </div>
+
+    <div id="setupRestore" hidden>
+      <label for="codeInput" data-t="recoveryCode"></label>
+      <input id="codeInput" type="text" maxlength="10" autocapitalize="characters" autocomplete="off" placeholder="M-XXXXXXXX" dir="ltr">
+      <button id="restoreBtn" class="btn primary" data-t="restore"></button>
+      <button id="showNew" class="btn link" data-t="back"></button>
+    </div>
+
+    <p id="setupMsg" class="error" role="alert"></p>
+    <button class="btn link langBtn"></button>
+  </div>
+</section>
+
+<!-- Wallet -->
+<section id="home" class="screen" hidden>
+  <header class="top">
+    <div>
+      <div class="hello" data-t="hello"></div>
+      <div id="memberName" class="name"></div>
+    </div>
+    <button class="chip langBtn"></button>
+  </header>
+
+  <div class="card">
+    <div class="card-label" data-t="balance"></div>
+    <div class="balance"><span id="balance">0</span><span class="unit">€</span></div>
+    <div id="syncState" class="sync"></div>
+  </div>
+
+  <div id="installTip" class="tip" hidden>
+    <span id="installText"></span>
+    <button id="installBtn" class="btn small" hidden data-t="install"></button>
+    <button id="installClose" class="x" aria-label="close">×</button>
+  </div>
+
+  <div id="acts" class="acts"></div>
+
+  <h2 data-t="history"></h2>
+  <ul id="history" class="history"></ul>
+
+  <footer class="foot">
+    <span data-t="recoveryCode"></span>: <b id="memberId" dir="ltr"></b>
+    <div class="muted small" data-t="recoveryHint"></div>
+  </footer>
+
+  <div class="scanbar">
+    <button id="scanBtn" class="btn primary scan"><span class="qr-ico">▦</span> <span data-t="scan"></span></button>
+  </div>
+</section>
+
+<!-- Scanner -->
+<section id="scanner" class="overlay" hidden>
+  <video id="video" playsinline muted autoplay></video>
+  <div class="frame"></div>
+  <p class="scan-hint" data-t="scanHint"></p>
+  <button id="scanCancel" class="btn ghost" data-t="cancel"></button>
+  <canvas id="canvas" hidden></canvas>
+</section>
+
+<!-- Result -->
+<section id="result" class="overlay dim" hidden>
+  <div class="sheet">
+    <div id="resultIcon" class="result-icon"></div>
+    <h2 id="resultTitle"></h2>
+    <p id="resultText" class="muted"></p>
+    <button id="resultOk" class="btn primary" data-t="ok"></button>
+    <button id="resultAgain" class="btn link" data-t="scanAgain"></button>
+  </div>
+</section>
+
+<script src="config.js"></script>
+<script src="vendor/jsQR.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
