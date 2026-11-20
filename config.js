@@ -6,10 +6,10 @@ window.EURO_CONFIG = {
   // Scanning window of each activity: its code works only on its own date, between "from" and "to".
   // m = Mass (Friday), s = Service (Friday), c = Class (Friday), t = Tasbeha (Thursday)
   hours: {
-    m: { from: "07:45", to: "11:30" },
-    s: { from: "10:00", to: "10:15" },
-    c: { from: "11:00", to: "11:30" },
-    t: { from: "19:00", to: "19:30" }
+    m: { from: "07:00", to: "09:00" },
+    s: { from: "10:00", to: "10:35" },
+    c: { from: "11:00", to: "11:40" },
+    t: { from: "19:00", to: "20:00" }
   },
 
   // Default language: "ar" or "en"
